@@ -1,0 +1,6 @@
+<p>sign in here!!</p>
+<form action="{% url 'blog:index' %}" method="POST">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Submit"/>
+</form>
