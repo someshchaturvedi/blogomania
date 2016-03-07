@@ -5,9 +5,11 @@ from django.contrib.auth.decorators import login_required
 import urllib2
 import urllib
 import json
+from .models import *
 from django.views.decorators.csrf import csrf_exempt , csrf_protect , requires_csrf_token
 from .forms import *
 from django.contrib.sessions.backends.db import SessionStore
+import facebook
 
 s = SessionStore()
 def index(request):
@@ -43,11 +45,15 @@ def index(request):
 		else:
 			form = UserForm()
 			return render(request, 'blog/index.html', {'form': form})
-	elif 'cogni_id' in s:
+	else:
 		return redirect('/blog/' + s['cogni_id'])
 
 def user_page(request , pk):
 	if 'cogni_id' in s:
+		#user_exsist = 0
+		#if blog_item.objects.get(-cog_id == 'COG16/' + str(pk) != None:
+		#	user_exsist = 1
+
 		if request.method == 'POST':
 			logout_form = LogoutForm(request.POST)
 			blog_form = BlogForm(request.POST)
@@ -57,7 +63,7 @@ def user_page(request , pk):
 				del s['cogni_id']
 				return redirect('/blog/')
 			else:
-				html = "<html><body> %s</body></html>" % request.session['cogni_id']
+				html = "<html><body> %s</body></html>" 'Something fucked up!!'
 				return HttpResponse(html)
 
 		else:
@@ -66,12 +72,35 @@ def user_page(request , pk):
 			blog_form = BlogForm()
 			#html = "<html><body> %s</body></html>" % s['cogni_id']
 			#return HttpResponse(html)
-			return render(request, 'blog/user_page.html' ,  {'logout_form': logout_form ,'blog_form':BlogForm , 'pk':pk , 'cogni_id':cogni_id})
+			return render(request, 'blog/user_page.html' ,  { 'logout_form': logout_form ,'blog_form':BlogForm , 'pk':pk , 'cogni_id':cogni_id})
 	else:
 		return redirect('/blog/' )
 
 def save_blog(request):
 	if request.method == 'POST':
+
+		cfg = {
+    		"page_id"      : "1727748890806283",
+    		"access_token" : "CAAGnyK6JzGUBAPipGNZAV5n51X9DbZAW8DkgOERlypcExAtFnA8DNBOHjShPlzQzYWsyC3GOVHpw2EWlDXZC3ZBMYKYm8ThpGzq7lvoqcj4lL15SgkzZCzMU090Uh2pB3R2NSMRhGmCBOdK2sHvdY1aC3lf5buP5dDcCZBvlRs0OiBls8VO0oEqqVlVUgj0lQCMTFvQBQZBhAZDZD"
+   			}
+
+   		def get_api(cfg):
+  			graph = facebook.GraphAPI(cfg['access_token'])
+  			#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!this is very very very very very very very important !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  			#resp = graph.get_object('me/accounts')
+			#page_access_token = None
+			#for page in resp['data']:
+			#	if page['id'] == cfg['page_id']:
+			#		page_access_token = page['access_token']
+			#graph = facebook.GraphAPI(page_access_token)
+			return graph
+
+  		api = get_api(cfg)
+ 		msg = "Helllfkdsjlfkjdlko, world!"
+  		status = api.put_wall_post(msg)
+
+		
+
 		blog_form = BlogForm(request.POST)
 		title= blog_form.data['title']
 		text = blog_form.data['text']
