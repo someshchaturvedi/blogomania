@@ -50,6 +50,9 @@ def index(request):
 
 def user_page(request , pk):
 	if 'cogni_id' in s:
+		user_exsist = 0
+		if blog_item.objects.filter(cog_id = 'COG16/' + str(s['cogni_id'])).count() == 1:
+			user_exsist = 1
 		if request.method == 'POST':
 			logout_form = LogoutForm(request.POST)
 			blog_form = BlogForm(request.POST)
@@ -62,16 +65,30 @@ def user_page(request , pk):
 				html = "<html><body> %s</body></html>" 'Something fucked up!!'
 				return HttpResponse(html)
 
-		else:
-			user_exsist = 0
-			if blog_item.objects.filter(cog_id = 'COG16/' + str(s['cogni_id'])).count() == 1:
-				user_exsist = 1
+		elif user_exsist == 0:
 			cogni_id = 'COG16/' + str(pk)
 			logout_form = LogoutForm()
 			blog_form = BlogForm()
 			#html = "<html><body> %s</body></html>" % s['cogni_id']
 			#return HttpResponse(html)
-			return render(request, 'blog/user_page.html' ,  { 'user_exsist':user_exsist,'logout_form': logout_form ,'blog_form':BlogForm , 'pk':pk , 'cogni_id':cogni_id})
+			return render(request, 'blog/user_page.html' ,  { 
+				'user_exsist':user_exsist,
+				'logout_form': logout_form ,
+				'blog_form':BlogForm ,
+				'pk':pk ,
+				'cogni_id':cogni_id})
+		
+		else:
+			cogni_id = 'COG16/' + str(pk)
+			x = blog_item.objects.filter(cog_id = 'COG16/' + str(pk))
+			logout_form = LogoutForm()
+			return render(request, 'blog/user_page.html' ,  { 
+				'user_exsist' :user_exsist,
+				'x' : x,
+				'logout_form': logout_form , 
+				'pk':pk , 
+				'cogni_id':cogni_id})
+
 	else:
 		return redirect('/blog/' )
 

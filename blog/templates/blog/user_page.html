@@ -13,12 +13,19 @@
 }(document, 'script', 'facebook-jssdk'));
 
 </script>
-
+{% if user_exsist == 0 %}
 <form action="/blog/saveblog/" method="POST">
   {% csrf_token %}
   {{ blog_form }}
 <input type="submit" value="Publish" id="publish"/>
 </form>
+{% else %}
+ {% for entry in x %}
+<p>{{ entry.cog_id }}</p>
+<h3>{{ entry.title }}</p>
+<p>{{ entry.text }}</p>
+{% endfor %}
+{% endif %}
 
 <form action="/blog/{{ pk }}/" method="POST">
 {% csrf_token %}
