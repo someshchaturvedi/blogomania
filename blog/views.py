@@ -50,10 +50,6 @@ def index(request):
 
 def user_page(request , pk):
 	if 'cogni_id' in s:
-		#user_exsist = 0
-		#if blog_item.objects.get(-cog_id == 'COG16/' + str(pk) != None:
-		#	user_exsist = 1
-
 		if request.method == 'POST':
 			logout_form = LogoutForm(request.POST)
 			blog_form = BlogForm(request.POST)
@@ -67,26 +63,33 @@ def user_page(request , pk):
 				return HttpResponse(html)
 
 		else:
+			user_exsist = 0
+			if blog_item.objects.filter(cog_id = 'COG16/' + str(s['cogni_id'])).count() == 1:
+				user_exsist = 1
 			cogni_id = 'COG16/' + str(pk)
 			logout_form = LogoutForm()
 			blog_form = BlogForm()
 			#html = "<html><body> %s</body></html>" % s['cogni_id']
 			#return HttpResponse(html)
-			return render(request, 'blog/user_page.html' ,  { 'logout_form': logout_form ,'blog_form':BlogForm , 'pk':pk , 'cogni_id':cogni_id})
+			return render(request, 'blog/user_page.html' ,  { 'user_exsist':user_exsist,'logout_form': logout_form ,'blog_form':BlogForm , 'pk':pk , 'cogni_id':cogni_id})
 	else:
 		return redirect('/blog/' )
 
 def save_blog(request):
 	if request.method == 'POST':
+		blog_form = BlogForm(request.POST)
+		text = blog_form.data['text']
+		title = blog_form.data['title']
+		content = 'COG16/' + s['cogni_id'] + "\n" + title + "\n" + text
+
 
 		cfg = {
     		"page_id"      : "1727748890806283",
-    		"access_token" : "CAAGnyK6JzGUBAPipGNZAV5n51X9DbZAW8DkgOERlypcExAtFnA8DNBOHjShPlzQzYWsyC3GOVHpw2EWlDXZC3ZBMYKYm8ThpGzq7lvoqcj4lL15SgkzZCzMU090Uh2pB3R2NSMRhGmCBOdK2sHvdY1aC3lf5buP5dDcCZBvlRs0OiBls8VO0oEqqVlVUgj0lQCMTFvQBQZBhAZDZD"
+    		"access_token" : "CAAGnyK6JzGUBAD05YORm5CkSBfqsKpQFTR4Lsx2bNWsYDZA1Lbp3nma2NGZBZBzbCnCRq1A7UZAXWauTrSoZC9b5u8hWx8Wfxh2jKeYbkpD9X7EabffpwHylPtyk7ZC0LmgXKdBkEaNzhc5zGxhdNaPjvp8DwV1ZCACOZAx1J3cVYFfCIQ6ZCMNOkaTSsGcq80GMvIRGqaVkPvwZDZD"
    			}
 
    		def get_api(cfg):
   			graph = facebook.GraphAPI(cfg['access_token'])
-  			#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!this is very very very very very very very important !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   			#resp = graph.get_object('me/accounts')
 			#page_access_token = None
 			#for page in resp['data']:
@@ -96,8 +99,8 @@ def save_blog(request):
 			return graph
 
   		api = get_api(cfg)
- 		msg = "Helllfkdsjlfkjdlko, world!"
-  		status = api.put_wall_post(msg)
+ 		msg = content
+  		status = api.put_wall_post(content)
 
 		
 
@@ -109,6 +112,8 @@ def save_blog(request):
 		new_blog_item.save()
 		
 		return redirect('/blog/' + s['cogni_id'])
+		#html = "<html><body> %s</body></html>" % user_exsist
+		#return HttpResponse(html)
 
 	else:
 		return redirect('/blog/')

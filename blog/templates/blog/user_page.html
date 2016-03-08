@@ -12,19 +12,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-var wallPost = {
-    access_token: "CAAGnyK6JzGUBANIrT4Tuy5yj8ZA9bjNHZAhw6vFZCB6CWQI4DFsydSgisdbkG0qSrulNrt4gc42KK2eTNHAyhiZBvdatU6MQmDPWjh2OSucWsvmxfRAZCSk4QG5SZCcrSBFdsYsU6uZCNhbhhlsZAFcTD4bw7GafODUZCB9KXCwUfxS7jcFLhyGpMCZAn9Wz2ZB7BhZCEetbvYitqQZDZD",
-    message: 'Hello, World!'
-};
-
-FB.api('/me/feed', 'post', wallPost, function(response) {
-    if (!response || response.error) {
-        alert('Error occurred');
-    } else {
-        alert('Success!');
-    }
-});
-
 </script>
 
 <form action="/blog/saveblog/" method="POST">

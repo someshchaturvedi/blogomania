@@ -11,5 +11,5 @@ class LogoutForm(forms.Form):
 class BlogForm(forms.Form):
 	title = forms.CharField(label = 'title' , max_length= 100 , initial = 'hello')
 	#text = forms.TextField(label = 'content' , max_length=1000)
-	text = forms.CharField(widget = forms.Textarea,label = 'content' , max_length=1000)
+	text = forms.CharField(widget = forms.Textarea,label = 'content')
 
