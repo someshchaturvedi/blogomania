@@ -1,4 +1,28 @@
 <html>
+<head>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+    .topbar{
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.desc, .feed, .top{
+  padding: 10px;
+  margin-top: 40px !important;
+  border-radius: 2px;
+  margin: 10px;
+}
+.desc{
+  margin-left: 20px !important;
+}
+
+  </style>
+</head>
 <body>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -7,14 +31,88 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=465955340274789";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-
 </script>
-<p>sign in here!!</p>
-<form action="{% url 'blog:index' %}" method="POST">
-{% csrf_token %}
-{{ form }}
-<input type="submit" value="Submit"/>
+
+
+<!-- Dropdown Structure -->
+<!-- <ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">three</a></li>
+</ul> -->
+
+
+<nav>
+  <div class="nav-wrapper topbar blue darken-2">
+    <a href="#!" class="brand-logo">Blogomania</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="#modal1" class="modal-trigger">Login</a></li>
+      <li><a href="http://cognizance.org.in/" target="_blank">Visit Cognizance</a></li>
+      <!-- Dropdown Trigger -->
+      <!-- <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li> -->
+    </ul>
+  </div>
+</nav>
+
+
+
+
+<!-- <div class="container"> -->
+  <div class="row">
+    <div class="col s3 desc grey lighten-4 z-depth-1">Blogomania is something something chutiyapa!!!! Blogomania is something something chutiyapa!!!!Blogomania is something something chutiyapa!!!!Blogomania is something something chutiyapa!!!!Blogomania is something something chutiyapa!!!!</div>
+    <div class="col s5 feed z-depth-1">
+      <div class="fb-page" data-href="https://www.facebook.com/Blogomania-1727748890806283" data-tabs="timeline" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+    </div>
+  </div>
+<!-- </div> -->
+
+
+
+
+
+
+<!-- Login Modal -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+    
+      <div class="row">
+        <!--<h5>Login</h5>
+        <div class="input-field col s12">
+          <form class="col s12" action="/blog/" method="POST" >
+            {% csrf_token %}
+          <input id="email" type="email" name="email" >
+          <label for="email" data-error="wrong" data-success="right">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" name ="password">
+          <label for="password" data-error="wrong" data-success="right" >Password</label>
+        </div>
+      </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <input type="submit" id="submit" class=" btn modal-action modal-close waves-effect waves-green btn-flat" value="Login">
 </form>
-<div class="fb-page" data-href="https://www.facebook.com/Blogomania-1727748890806283" data-tabs="timeline" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+</div>-->
+<form class="col s12" action="/blog/" method="POST" >
+  <form  action="/blog/" method="POST" >
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" id="submit"  value="Login">
+</div>
+
+
+
+
+<script>
+$(document).ready(function(){
+  $(".dropdown-button").dropdown();
+  $('.modal-trigger').leanModal();
+});
+</script>
 </body>
 </html>

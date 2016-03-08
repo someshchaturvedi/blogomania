@@ -2,8 +2,8 @@ from django import forms
 from blog.models import blog_item
 
 class UserForm(forms.Form): 
-	email = forms.EmailField(label='user_emailid', max_length=100)
-	password = forms.CharField(label='password', max_length=100)
+	email = forms.EmailField(label='Email', max_length=100)
+	password = forms.CharField(widget=forms.PasswordInput, label='Password', max_length=100)
 
 class LogoutForm(forms.Form):
 	logout = forms.IntegerField(widget = forms.HiddenInput(),initial='1')
