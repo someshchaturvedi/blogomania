@@ -9,7 +9,7 @@ class LogoutForm(forms.Form):
 	logout = forms.IntegerField(widget = forms.HiddenInput(),initial='1')
 
 class BlogForm(forms.Form):
-	title = forms.CharField(label = 'title' , max_length= 100 , initial = 'hello')
+	title = forms.CharField(label = 'title' , max_length= 100 )
 	#text = forms.TextField(label = 'content' , max_length=1000)
 	text = forms.CharField(widget = forms.Textarea,label = 'content')
 
