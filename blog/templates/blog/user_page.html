@@ -41,7 +41,7 @@
     <a href="#!" class="brand-logo">Blogomania</a>
     <ul class="right hide-on-med-and-down">
       <li><a>
-        <form action="/blog/{{ pk }}/" method="POST">
+        <form action="/{{ pk }}/" method="POST">
         {% csrf_token %}
         {{ logout_form }}
         <input type="submit" value="Logout" id="logout"/>
@@ -71,7 +71,7 @@
     <div class="col s3 top grey lighten-4">
 
 {% if user_exsist == 0 %}
-<form action="/blog/saveblog/" method="POST">
+<form action="/saveblog/" method="POST">
   {% csrf_token %}
   {{ blog_form }}
 <input type="submit" value="Post" id="publish"/>

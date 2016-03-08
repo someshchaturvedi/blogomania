@@ -38,7 +38,7 @@ def index(request):
 				if (get_message(api_data)) == "Successfully logged in!" :
 					s['cogni_id'] = get_cogni_id(api_data)
 					s.save()
-					return redirect('/blog/' + str(get_cogni_id(api_data) ))
+					return redirect('/' + str(get_cogni_id(api_data) ))
 				else:
 					html = "<html><body> %s</body></html>" % str(get_message(api_data))
 					return HttpResponse(html)
@@ -46,7 +46,7 @@ def index(request):
 			form = UserForm()
 			return render(request, 'blog/index.html', {'form': form})
 	else:
-		return redirect('/blog/' + s['cogni_id'])
+		return redirect('/' + s['cogni_id'])
 
 def user_page(request , pk):
 	if 'cogni_id' in s:
@@ -60,7 +60,7 @@ def user_page(request , pk):
 			a = int(a)
 			if a == 1:
 				del s['cogni_id']
-				return redirect('/blog/')
+				return redirect('/')
 			else:
 				html = "<html><body> %s</body></html>" 'Something fucked up!!'
 				return HttpResponse(html)
@@ -90,7 +90,7 @@ def user_page(request , pk):
 				'cogni_id':cogni_id})
 
 	else:
-		return redirect('/blog/' )
+		return redirect('/' )
 
 def save_blog(request):
 	if request.method == 'POST':
@@ -128,12 +128,12 @@ def save_blog(request):
 		new_blog_item = blog_item(cog_id = cogni_id , title = title , text= text )
 		new_blog_item.save()
 		
-		return redirect('/blog/' + s['cogni_id'])
+		return redirect('/' + s['cogni_id'])
 		#html = "<html><body> %s</body></html>" % user_exsist
 		#return HttpResponse(html)
 
 	else:
-		return redirect('/blog/')
+		return redirect('/')
 
 
 
