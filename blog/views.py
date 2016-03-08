@@ -44,7 +44,7 @@ def index(request):
 					return HttpResponse(html)
 		else:
 			form = UserForm()
-			return render(request, 'blog/index.html', {'form': form})
+			return render(request, '/index.html', {'form': form})
 	else:
 		return redirect('/' + s['cogni_id'])
 
@@ -71,7 +71,7 @@ def user_page(request , pk):
 			blog_form = BlogForm()
 			#html = "<html><body> %s</body></html>" % s['cogni_id']
 			#return HttpResponse(html)
-			return render(request, 'blog/user_page.html' ,  { 
+			return render(request, '/user_page.html' ,  { 
 				'user_exsist':user_exsist,
 				'logout_form': logout_form ,
 				'blog_form':BlogForm ,
@@ -82,7 +82,7 @@ def user_page(request , pk):
 			cogni_id = 'COG16/' + str(pk)
 			x = blog_item.objects.filter(cog_id = 'COG16/' + str(pk))
 			logout_form = LogoutForm()
-			return render(request, 'blog/user_page.html' ,  { 
+			return render(request, '/user_page.html' ,  { 
 				'user_exsist' :user_exsist,
 				'x' : x,
 				'logout_form': logout_form , 
