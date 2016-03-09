@@ -1,3 +1,5 @@
+
+{% load staticfiles %}
 <html>
 <head>
 
@@ -34,19 +36,13 @@
 </script>
 
 
-<!-- Dropdown Structure -->
-<!-- <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-</ul> -->
 
 
 <nav>
   <div class="nav-wrapper topbar blue darken-2">
     <a href="#!" class="brand-logo">Blogomania</a>
     <ul class="right hide-on-med-and-down">
+      <li><img src="http://res.cloudinary.com/cognizance-16/image/upload/v1457532584/cf_ahf9bc.png" alt="My image" style="width:100px"/></li>
       <li><a href="#modal1" class="modal-trigger">Login/Post</a></li>
       <li><a href="http://cognizance.org.in/" target="_blank">Visit Cognizance</a></li>
       <!-- Dropdown Trigger -->
@@ -79,26 +75,7 @@
     <div class="row">
     
       <div class="row">
-        <!--<h5>Login</h5>
-        <div class="input-field col s12">
-          <form class="col s12" action="/blog/" method="POST" >
-            {% csrf_token %}
-          <input id="email" type="email" name="email" >
-          <label for="email" data-error="wrong" data-success="right">Email</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate" name ="password">
-          <label for="password" data-error="wrong" data-success="right" >Password</label>
-        </div>
-      </div>
-  </div>
-  </div>
-  <div class="modal-footer">
-    <input type="submit" id="submit" class=" btn modal-action modal-close waves-effect waves-green btn-flat" value="Login">
-</form>
-</div>-->
+        
 <form class="col s12" action="/" method="POST" >
   <form  action="/" method="POST" >
   {% csrf_token %}

@@ -1,3 +1,6 @@
+
+{% load staticfiles %}
+
 <html>
 <head>
   <link rel="stylesheet" href="style.css" />
@@ -40,8 +43,8 @@
   <div class="nav-wrapper topbar blue darken-2">
     <a href="#!" class="brand-logo">Blogomania</a>
     <ul class="right hide-on-med-and-down">
-      <li><a>
-        <form action="/{{ pk }}/" method="POST">
+      <li><img src="http://res.cloudinary.com/cognizance-16/image/upload/v1457532584/cf_ahf9bc.png" alt="My image" style="width:100px"/></li>
+       <li><form action="/{{ pk }}/" method="POST">
         {% csrf_token %}
         {{ logout_form }}
         <input type="submit" value="Logout" id="logout"/>
